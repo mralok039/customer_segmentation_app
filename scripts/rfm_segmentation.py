@@ -1,3 +1,5 @@
+# 📊 Day 2: RFM scoring and segmentation logic
+
 import pandas as pd
 import numpy as np
 import os
