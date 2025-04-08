@@ -88,3 +88,8 @@ plt.ylabel('Number of Customers')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
+
+
+rfm.to_csv("outputs/rfm_scores.csv", index=False)
+
+
