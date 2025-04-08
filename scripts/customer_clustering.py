@@ -63,3 +63,28 @@ plt.show()
 output_path = "outputs/rfm_with_clusters.csv"
 rfm.to_csv(output_path, index=False)
 print(f"✅ RFM with clusters saved to {output_path}")
+
+
+# Step 4: Visualize Clusters using PCA
+from sklearn.decomposition import PCA
+
+pca = PCA(n_components=2)
+rfm_pca = pca.fit_transform(rfm_scaled)
+
+# Convert to DataFrame
+pca_df = pd.DataFrame(rfm_pca, columns=["PC1", "PC2"])
+pca_df['Cluster'] = rfm['Cluster'].astype(str)
+
+# Plot PCA-based Clusters
+plt.figure(figsize=(10, 6))
+for cluster in sorted(pca_df['Cluster'].unique()):
+    clustered = pca_df[pca_df['Cluster'] == cluster]
+    plt.scatter(clustered['PC1'], clustered['PC2'], label=f"Cluster {cluster}")
+
+plt.title("Customer Segments (PCA)")
+plt.xlabel("Principal Component 1")
+plt.ylabel("Principal Component 2")
+plt.legend()
+plt.tight_layout()
+plt.savefig("outputs/cluster_visualization.png")
+plt.show()
